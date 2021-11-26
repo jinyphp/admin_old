@@ -20,6 +20,22 @@ Route::middleware(['web','auth:sanctum', 'verified'])
         Route::get('/', [\Jiny\Admin\Http\Controllers\UserController::class,"index"]);
     });
 
+    Route::prefix('/theme')->name('theme.')->group(function () {
+        Route::resource('list',\Jiny\Admin\Http\Controllers\Theme\ThemeListController::class);
+    });
+
+    /*
+    Route::prefix('/site')->name('site.')->group(function () {
+        ## 메뉴구조
+        //Route::resource('menu',\Jiny\Admin\Http\Controllers\Site\MenuListController::class);
+        //return view('jinyadmin::site.menu.index');
+        Route::view('menu', 'jinyadmin::site.menu.code');
+        //Route::view('menu/items', 'jinyadmin::site.menu.items');
+        Route::get('menu/{id}',[\Jiny\Admin\Http\Controllers\Site\MenuItems::class,"index"]);
+
+    });
+    */
+
 
 
 

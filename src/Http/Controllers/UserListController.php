@@ -20,6 +20,8 @@ class UserListController extends Controller
     public function index()
     {
 
+
+
         /*
         $cssToInlineStyles = new CssToInlineStyles();
         $html = file_get_contents(resource_path('views')."/zabbix/forms-ul.html");

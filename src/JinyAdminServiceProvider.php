@@ -15,10 +15,20 @@ class JinyAdminServiceProvider extends ServiceProvider
         // 모듈: 라우트 설정
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', $this->package);
+
+        //Blade::component(\Jiny\Admin\View\Components\Tree::class, "admin-tree");
     }
 
     public function register()
     {
+        /* 라이브와이어 컴포넌트 등록 */
+
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('LiveTreeJson', \Jiny\Admin\Http\Livewire\LiveTreeJson::class);
+
+            //Livewire::component('Admin-SiteMenu-Items', \Jiny\Admin\Http\Livewire\Site\MenuItemsWire::class);
+            //Livewire::component('Admin-SiteMenu-Code', \Jiny\Admin\Http\Livewire\Site\MenuCodeWire::class);
+        });
 
     }
 

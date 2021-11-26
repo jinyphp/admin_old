@@ -22,49 +22,56 @@
             </x-row>
             <!-- end page title -->
 
-            <x-card>
-                <x-card-header>
+            <x-row>
+                <div class="col-lg-2">
+                    @include("jinyadmin::users.submenu")
+                </div>
+                <div class="col-lg-10">
+                    <x-card>
+                        <x-card-header>
 
-                </x-card-header>
-                <x-card-body>
+                        </x-card-header>
+                        <x-card-body>
 
-                    <x-row>
-                        <div class="col-sm-10 col-md-8 col-lg-6">
+                            <x-row>
+                                <div class="col-sm-10 col-md-8 col-lg-6">
 
-                        <x-form-patch action="{{route('admin.users.role.update', $role->id)}}">
+                                <x-form-patch action="{{route('admin.users.role.update', $role->id)}}">
 
-                            <x-form-hor>
-                                <x-form-label>
-                                    {{ __('Name') }}
-                                </x-form-label>
-                                <x-form-item>
-                                    <input class="form-control form-control-lg" type="text" name="name"
-                                        placeholder=""
-                                        value="{{old('name')}}@isset($role){{$role->name}}@endisset"
-                                        @error('name') is-invalid @enderror
-                                    >
-                                    @error('name') {{$message}} @enderror
-                                </x-form-item>
-                            </x-form-row>
+                                    <x-form-hor>
+                                        <x-form-label>
+                                            {{ __('Name') }}
+                                        </x-form-label>
+                                        <x-form-item>
+                                            <input class="form-control form-control-lg" type="text" name="name"
+                                                placeholder=""
+                                                value="{{old('name')}}@isset($role){{$role->name}}@endisset"
+                                                @error('name') is-invalid @enderror
+                                            >
+                                            @error('name') {{$message}} @enderror
+                                        </x-form-item>
+                                    </x-form-row>
 
-                                <x-form-submit class="btn btn-success">
-                                    수정
-                                </x-form-submit>
+                                        <x-form-submit class="btn btn-success">
+                                            수정
+                                        </x-form-submit>
 
-                            </x-form-post>
+                                    </x-form-post>
 
-                            <a href="" onclick="event.preventDefault(); document.getElementById('delete-user-form-{{$role->id}}').submit()">Delete</a>
-                            <form id="delete-user-form-{{$role->id}}"
-                                action="{{ route('admin.users.role.destroy', $role->id)}}" method="POST"
-                                style="display: none">
-                                @csrf
-                                @method("DELETE")
-                            </form>
+                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-user-form-{{$role->id}}').submit()">Delete</a>
+                                    <form id="delete-user-form-{{$role->id}}"
+                                        action="{{ route('admin.users.role.destroy', $role->id)}}" method="POST"
+                                        style="display: none">
+                                        @csrf
+                                        @method("DELETE")
+                                    </form>
 
-                        </div>
-                    </x-row>
-                </x-card-body>
-            </x-card>
+                                </div>
+                            </x-row>
+                        </x-card-body>
+                    </x-card>
+                </div>
+            </x-row>
 
 
         </x-container-fluid>

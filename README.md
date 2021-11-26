@@ -1,4 +1,5 @@
-# jinyPHP Admin
+# Admin by jinyPHP
+JinyPHP Admin 관리자 입니다.
 
 ## 설치
 ```

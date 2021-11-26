@@ -46,35 +46,49 @@
             </div>
         @endif
 
+        <x-row>
+            <div class="col-lg-2">
+                @include("jinyadmin::users.submenu")
+            </div>
+            <div class="col-lg-10">
+                <x-card>
+                    <x-card-header>
+                    </x-card-header>
+                    <x-card-body>
+                        <x-table>
+                            <x-thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Varified</th>
+                                    <th>2FA</th>
+                                    <th>Expire</th>
+                                    <th>regdate</th>
+                                </tr>
+                            </x-thead>
+                            <tbody>
+                                @foreach ($users as $item)
+                                    <tr>
+                                        <td>{{$item->id}}</td>
+                                        <td><a href="{{route('admin.users.list.profile.index',[ $item->id ])}}">{{$item->name}}</a></td>
+                                        <td><a href="{{route('admin.users.list.edit', $item->id)}}">{{$item->email}}</a></td>
+                                        <td>Role</td>
+                                        <td>Varified</td>
+                                        <td>2FA</td>
+                                        <td>Expire</td>
+                                        <td>{{$item->created_at}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </x-table>
 
-        <x-card>
-            <x-card-header>
-            </x-card-header>
-            <x-card-body>
-                <x-table>
-                    <x-thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>regdate</th>
-                        </tr>
-                    </x-thead>
-                    <tbody>
-                        @foreach ($users as $item)
-                            <tr>
-                                <td>{{$item->id}}</td>
-                                <td><a href="{{route('admin.users.list.profile.index',[ $item->id ])}}">{{$item->name}}</a></td>
-                                <td><a href="{{route('admin.users.list.edit', $item->id)}}">{{$item->email}}</a></td>
-                                <td>{{$item->created_at}}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </x-table>
-
-                {{$users->links()}}
-            </x-card-body>
-        </x-card>
+                        {{$users->links()}}
+                    </x-card-body>
+                </x-card>
+            </div>
+        </x-row>
 
 
     </x-theme-layout>

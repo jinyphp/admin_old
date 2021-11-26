@@ -27,32 +27,41 @@
         </div>
 
         <x-row>
-            <x-col>
-                <x-card>
-                    <x-card-header>
+            <div class="col-lg-2">
+                @include("jinyadmin::users.submenu")
+            </div>
+            <div class="col-lg-10">
+                <x-row>
+                    <x-col>
+                        <x-card>
+                            <x-card-header>
 
-                    </x-card-header>
-                    <x-card-body>
-                        <x-table>
-                            <x-thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                </tr>
-                            </x-thead>
-                            <tbody>
-                                @foreach ($roles as $item)
-                                    <tr>
-                                        <td>{{$item->id}}</td>
-                                        <td><a href="{{route('admin.users.role.edit', $item->id)}}">{{$item->name}}</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </x-table>
-                    </x-card-body>
-                </x-card>
-            </x-col>
+                            </x-card-header>
+                            <x-card-body>
+                                <x-table>
+                                    <x-thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </x-thead>
+                                    <tbody>
+                                        @foreach ($roles as $item)
+                                            <tr>
+                                                <td>{{$item->id}}</td>
+                                                <td><a href="{{route('admin.users.role.edit', $item->id)}}">{{$item->name}}</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </x-table>
+                            </x-card-body>
+                        </x-card>
+                    </x-col>
+                </x-row>
+            </div>
         </x-row>
+
+
 
     </x-theme-layout>
 </x-theme>

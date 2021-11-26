@@ -19,9 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('is-admin')) {
+            $userTotal = User::all()->count();
+            return view('jinyadmin::users.users', ['userTotal'=>$userTotal]);
+        } else {
+            return "관리자 회원만 접속이 가능합니다.";
+        }
 
-        $userTotal = User::all()->count();
-        return view('jinyadmin::users.dashboard', ['userTotal'=>$userTotal]);
+
         /*
         $users = User::paginate(5);
         return view('admin.users.lists.index')
