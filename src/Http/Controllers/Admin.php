@@ -14,7 +14,7 @@ class Admin extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -24,11 +24,14 @@ class Admin extends Controller
      */
     public function index()
     {
+        return view('jinyadmin::dashboard');
+        /*
         if(auth()->user()->isAdmin) {
             return view('jinyadmin::dashboard');
         } else {
             return "관리자만 접속할 수 있습니다.";
         }
+        */
 
 
     }

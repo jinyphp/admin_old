@@ -16,6 +16,9 @@ class JinyAdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', $this->package);
 
+        // 데이터베이스
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
         //Blade::component(\Jiny\Admin\View\Components\Tree::class, "admin-tree");
     }
 
@@ -28,6 +31,9 @@ class JinyAdminServiceProvider extends ServiceProvider
 
             //Livewire::component('Admin-SiteMenu-Items', \Jiny\Admin\Http\Livewire\Site\MenuItemsWire::class);
             //Livewire::component('Admin-SiteMenu-Code', \Jiny\Admin\Http\Livewire\Site\MenuCodeWire::class);
+
+            // 404 페이지 추가 popup
+            Livewire::component('AddPopupPage', \Jiny\Admin\Http\Livewire\AddPopupPage::class);
         });
 
     }

@@ -7,13 +7,11 @@
                         {{$name}}
                     </x-card-header>
                 </x-card>
-            </x-col-3>                
+            </x-col-3>
         @endforeach
-        
+
         <x-col-3>
             <x-button primary>추가</x-button>
         </x-col-3>
     </x-row>
-
-    
 </div>
