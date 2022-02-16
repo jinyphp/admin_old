@@ -1,4 +1,4 @@
-<x-theme theme="admin.sidebar3">
+<x-theme theme="admin.sidebar2">
     <x-theme-layout>
 
         <!-- start page title -->

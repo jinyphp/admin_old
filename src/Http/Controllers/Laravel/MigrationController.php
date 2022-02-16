@@ -45,18 +45,9 @@ class MigrationController extends ResourceController
      * Livewire 동작후 실행되는 메서드ed
      */
     ## 목록 데이터 fetch후 호출 됩니다.
-    public function hookIndexed($rows)
+    public function hookIndexed($wire, $rows)
     {
-        //$cmd = new \Illuminate\Database\Console\Migrations\BaseCommand();
-        //dd($cmd->getMigrationPath());
 
-        //$class = "CreateHrCareerTable";
-        //dd(new $class);
-        //$mig = new \CreateHrCareerTable();
-        //dd($mig);
-
-
-        //$this->wire->aaa = "hello";
         $this->wire->_rows = [];
         foreach ($rows as $item) {
             $id = $item->id;
@@ -77,41 +68,13 @@ class MigrationController extends ResourceController
 
         }
 
+        return $rows;
     }
 
-    ## 생성폼이 실행될때 호출됩니다.
-    public function hookCreating()
-    {
 
-    }
-
-    ## 신규 데이터 DB 삽입전에 호출됩니다.
-    public function hookStoring($form)
-    {
-        return $form;
-    }
-
-    ## 수정폼이 실행될때 호출됩니다.
-    public function hookEdited($form)
-    {
-        return $form;
-    }
-
-    ## 수정된 데이터가 DB에 적용되기 전에 호출됩니다.
-    public function hookUpdating($form)
-    {
-        return $form;
-    }
-
-    ## 데이터가 삭제되기 전에 호출됩니다.
-    public function hookDeleted()
-    {
-        // 데이터 삭제
-
-    }
 
     ## 선택항목 삭제 후킹
-    public function hookCheckDelete($selected)
+    public function hookCheckDeleted($selected)
     {
 
         foreach($selected as $id) {

@@ -7,7 +7,11 @@ Route::middleware(['web','auth:sanctum', 'verified'])
 ->name('admin.')
 ->prefix('/admin')->group(function () {
 
-    Route::get('/', [Jiny\Admin\Http\Controllers\Admin::class,"index"]);
+    // Route::get('/', [Jiny\Admin\Http\Controllers\Admin::class,"index"]);
+
+    // 사이트 데쉬보드
+    Route::get('/', [\Jiny\Site\Http\Controllers\Admin\Dashboard::class, "index"]);
+
 
     // 모듈관리
     Route::resource('modules',\Jiny\Admin\Http\Controllers\Modules::class);
@@ -21,9 +25,11 @@ Route::middleware(['web','auth:sanctum', 'verified'])
         Route::get('/', [\Jiny\Admin\Http\Controllers\UserController::class,"index"]);
     });
 
+    /*
     Route::prefix('/theme')->name('theme.')->group(function () {
         Route::resource('list',\Jiny\Admin\Http\Controllers\Theme\ThemeListController::class);
     });
+    */
 
     /*
     Route::prefix('/site')->name('site.')->group(function () {
@@ -56,16 +62,32 @@ Route::middleware(['web','auth:sanctum', 'verified'])
 
 
 
-## Jiny Admin
+
+/** ----- ----- ----- ----- -----
+ * Jiny Admin
+ */
 Route::middleware(['web','auth:sanctum', 'verified'])
 ->name('admin.jiny.')
 ->prefix('/admin/jiny')->group(function () {
     Route::resource('actions',\Jiny\Admin\Http\Controllers\Jiny\ActionController::class);
     Route::resource('modules',\Jiny\Admin\Http\Controllers\Jiny\ModulesController::class);
-    Route::resource('route',\Jiny\Admin\Http\Controllers\Jiny\RouteController::class);
+    Route::resource('routes',\Jiny\Admin\Http\Controllers\Jiny\RouteController::class);
+
+
+
+    // dashboard
+    Route::get('/', function(){
+        return view("jinyadmin::jiny.dashboard");
+    });
 });
 
 
+
+
+
+/** ----- ----- ----- ----- -----
+ * Dynamic route
+ */
 
 if(!function_exists("jinyRoute")) {
     function jinyRoute($uri) {
@@ -98,11 +120,10 @@ function jinyRouteParser($type)
     } else if($type == "form") {
     }
 }
-/**
- *
- */
+
 // 페이지 라우트 검사.
 if(isset($_SERVER['PATH_INFO'])) {
+
     if($row = jinyRoute($_SERVER['PATH_INFO'])) {
         $uris = explode('/', $_SERVER['PATH_INFO']);
 
@@ -125,13 +146,17 @@ if(isset($_SERVER['PATH_INFO'])) {
 
         $filename = str_replace("/","_",$_SERVER['PATH_INFO']).".json";
         $filename = ltrim($filename,"_");
-        //dd($path.DIRECTORY_SEPARATOR.$filename);
         if(file_exists($path.DIRECTORY_SEPARATOR.$filename)) {
             $json = file_get_contents($path.DIRECTORY_SEPARATOR.$filename);
             $actions = json_decode($json,true);
 
             if(isset($actions['view_content'])) {
                 // static view
+                DB::table("jiny_route")->insertOrIgnore([
+                    'route'=>$_SERVER['PATH_INFO'],
+                    'type'=>"view:view",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
                 Route::middleware(['web'])
                 ->name( str_replace("/",".",$_SERVER['PATH_INFO']).".")
                 ->group(function () use ($row){
@@ -140,6 +165,11 @@ if(isset($_SERVER['PATH_INFO'])) {
 
             } else if(isset($actions['post_table'])) {
                 // post
+                DB::table("jiny_route")->insertOrIgnore([
+                    'route'=>$_SERVER['PATH_INFO'],
+                    'type'=>"post:post",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
                 Route::middleware(['web'])
                 ->name( str_replace("/",".",$_SERVER['PATH_INFO']).".")
                 ->group(function () use ($row){
@@ -147,22 +177,47 @@ if(isset($_SERVER['PATH_INFO'])) {
                 });
             } else if(isset($actions['view_markdown'])) {
                 // post
+                DB::table("jiny_route")->insertOrIgnore([
+                    'route'=>$_SERVER['PATH_INFO'],
+                    'type'=>"markdown:markdown",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
                 Route::middleware(['web'])
                 ->name( str_replace("/",".",$_SERVER['PATH_INFO']).".")
                 ->group(function () use ($row){
                     jinyRouteParser("markdown");
                 });
+            } else if(isset($actions['table'])) {
+
             }
-
-
         }
 
     }
 }
 
-
-
+/** ----- ----- ----- ----- -----
+ * 404 page 처리
+ */
 // smart 404 Page
 Route::fallback(function () {
+
+    // blade.php 파일이 있는 경우 찾아서 출력함
+    $filename = str_replace('/','.',$_SERVER['PATH_INFO']);
+    $filename = ltrim($filename,".");
+    if (view()->exists($filename))
+    {
+        return view($filename);
+    } else if (view()->exists($filename.".index"))
+    {
+        return view($filename.".index");
+    }
+
+
     return view("jinyadmin::errors.404");
 })->middleware('web');
+
+use Jiny\Admin\API\Controllers\Upload404;
+Route::middleware(['web'])
+->group(function(){
+    Route::post('/api/upload/404',[Upload404::class,"dropzone"]);
+});

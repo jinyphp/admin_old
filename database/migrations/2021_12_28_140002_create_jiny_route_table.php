@@ -19,8 +19,9 @@ class CreateJinyRouteTable extends Migration
             $table->string('enable')->default(1);
 
             $table->string('uri')->nullable();
-            $table->string('route')->nullable();
+            $table->string('route')->unique();
             $table->string('type')->nullable(); // view, post, markdown
+            $table->string('path')->nullable();
 
             $table->string('page')->nullable();
 

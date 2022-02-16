@@ -32,8 +32,12 @@ class JinyAdminServiceProvider extends ServiceProvider
             //Livewire::component('Admin-SiteMenu-Items', \Jiny\Admin\Http\Livewire\Site\MenuItemsWire::class);
             //Livewire::component('Admin-SiteMenu-Code', \Jiny\Admin\Http\Livewire\Site\MenuCodeWire::class);
 
+
+
             // 404 페이지 추가 popup
             Livewire::component('AddPopupPage', \Jiny\Admin\Http\Livewire\AddPopupPage::class);
+
+            Livewire::component('Drop404', \Jiny\Admin\Http\Livewire\Drop404::class);
         });
 
     }

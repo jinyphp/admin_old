@@ -39,35 +39,35 @@ class AddPopupPage extends Component
     {
         //$uri = Route::current()->uri;
         //dd($this->uri);
-        $this->form['enable'] = 1;
-        $this->form['route'] = $this->uri;
+        $this->forms['enable'] = 1;
+        $this->forms['route'] = $this->uri;
         $this->popupRuleOpen();
 
     }
 
 
-    public $form = [];
+    public $forms = [];
     public function save()
     {
         //유효성 검사
         if (isset($this->actions['validate'])) {
-            $validator = Validator::make($this->form, $this->actions['validate'])->validate();
+            $validator = Validator::make($this->forms, $this->actions['validate'])->validate();
         }
 
         // 시간정보 생성
-        $this->form['created_at'] = date("Y-m-d H:i:s");
-        $this->form['updated_at'] = date("Y-m-d H:i:s");
+        $this->forms['created_at'] = date("Y-m-d H:i:s");
+        $this->forms['updated_at'] = date("Y-m-d H:i:s");
 
 
         // 데이터 삽입
-        DB::table("jiny_route")->insertGetId($this->form);
+        DB::table("jiny_route")->insertGetId($this->forms);
 
         $this->popupRuleClose();
 
         // Livewire Table을 갱신을 호출합니다.
         //$this->emit('refeshTable');
 
-        return redirect()->to($this->form['route']);
+        return redirect()->to($this->forms['route']);
     }
 
 }

@@ -13,7 +13,7 @@
                 <x-form-label>활성화</x-form-label>
                 <x-form-item>
                     {!! xCheckbox()
-                        ->setWire('model.defer',"form.enable")
+                        ->setWire('model.defer',"forms.enable")
                     !!}
                 </x-form-item>
             </x-form-hor>
@@ -23,7 +23,7 @@
                 <x-form-label>uri</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.uri")
+                        ->setWire('model.defer',"forms.uri")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -33,7 +33,7 @@
                 <x-form-label>컨트롤러</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.controller")
+                        ->setWire('model.defer',"forms.controller")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -43,7 +43,7 @@
                 <x-form-label>테이블</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.table")
+                        ->setWire('model.defer',"forms.table")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -53,7 +53,7 @@
                 <x-form-label>페이징</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.paging")
+                        ->setWire('model.defer',"forms.paging")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -63,7 +63,7 @@
                 <x-form-label>조건</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.where")
+                        ->setWire('model.defer',"forms.where")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -74,7 +74,7 @@
                 <x-form-label>view_main</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_main")
+                        ->setWire('model.defer',"forms.view_main")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -84,7 +84,7 @@
                 <x-form-label>view_title</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_title")
+                        ->setWire('model.defer',"forms.view_title")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -94,7 +94,7 @@
                 <x-form-label>view_filter</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_filter")
+                        ->setWire('model.defer',"forms.view_filter")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -104,7 +104,7 @@
                 <x-form-label>view_list</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_list")
+                        ->setWire('model.defer',"forms.view_list")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -114,7 +114,7 @@
                 <x-form-label>view_edit</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_edit")
+                        ->setWire('model.defer',"forms.view_edit")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -124,7 +124,7 @@
                 <x-form-label>view_form</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"form.view_form")
+                        ->setWire('model.defer',"forms.view_form")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
@@ -147,7 +147,7 @@
                 <x-form-label>메모</x-form-label>
                 <x-form-item>
                     {!! xTextarea()
-                        ->setWire('model.defer',"form.description")
+                        ->setWire('model.defer',"forms.description")
                     !!}
                 </x-form-item>
             </x-form-hor>
