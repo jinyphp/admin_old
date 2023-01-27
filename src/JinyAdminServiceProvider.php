@@ -27,6 +27,7 @@ class JinyAdminServiceProvider extends ServiceProvider
         /* 라이브와이어 컴포넌트 등록 */
 
         $this->app->afterResolving(BladeCompiler::class, function () {
+            /*
             Livewire::component('LiveTreeJson', \Jiny\Admin\Http\Livewire\LiveTreeJson::class);
 
             //Livewire::component('Admin-SiteMenu-Items', \Jiny\Admin\Http\Livewire\Site\MenuItemsWire::class);
@@ -38,6 +39,7 @@ class JinyAdminServiceProvider extends ServiceProvider
             Livewire::component('AddPopupPage', \Jiny\Admin\Http\Livewire\AddPopupPage::class);
 
             Livewire::component('Drop404', \Jiny\Admin\Http\Livewire\Drop404::class);
+            */
         });
 
     }
